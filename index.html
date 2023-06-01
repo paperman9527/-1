@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智慧能源分公司门户</title>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body>
+    <div class="els-headerTitle">
+        <div class="selectBox">
+            <div>
+                <label>公司切换：</label>
+                <select name="" id="" style="width: 10vw; height:1.8vw;">
+                    <option value="" class="selectBg">111111111</option>
+                    <option value="" class="selectBg">2222222222</option>
+                    <option value="" class="selectBg">3333333333</option>
+                </select>
+            </div>
+            <select name="" id="" style="width: 10vw; height:1.8vw;margin-left: 1vw;">
+                <option value="" class="selectBg">111111111</option>
+                <option value="" class="selectBg">2222222222</option>
+                <option value="" class="selectBg">3333333333</option>
+            </select>
+            <button>
+                <img src="./img/btn.png">
+                <div style="margin-left:8px">进入项目</div>
+            </button>
+        </div>
+        <div class="title">智慧能源分公司门户</div>
+        <div class="timeBox">
+            <div id="year"></div>
+            <div id="time"></div>
+        </div>
+    </div>
+    <div class="els-content">
+        <div class="part1">
+            <div class="ch1">
+                <div class="chBox chBox1">
+                    <div class="text">15</div>
+                    <div class="title">开工项目</div>
+                    <img src="./img/icon1.png" style="width: 10vw;">
+                </div>
+                <div class="chBox chBox2">
+                    <div class="text ">15</div>
+                    <div class="title">开工项目</div>
+                    <img src="./img/icon2.png" style="width: 10vw;">
+                </div>
+            </div>
+            <div class="ch2">
+                <div class="bgTitle">项目里程碑计划</div>
+                <div id="pie1" style="width:100%;height: 20vh;"></div>
+            </div>
+        </div>
+        <div class="part2">
+            <div id="chinaMap" style="width:100%;height: 40vh;"></div>
+        </div>
+        <div class="part3">
+            <div class="content1">
+                <div id="line1" style="width:100%;height: 20vh;"></div>
+            </div>
+            <div class="content2">
+                <div id="line2" style="width:100%;height: 20vh;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="elTable">
+        <table style="width: 100%;">
+            <tr>
+                <th style="width: 5%;text-align: left;">序号</th>
+                <th style="width: 10%;text-align: left;">项目编码</th>
+                <th style="width: 25%;text-align: left;">项目名称</th>
+                <th style="width: 10%;text-align: left;">里程碑状态</th>
+                <th style="width: 10%;text-align: left;">问题描述</th>
+                <th style="width: 10%;text-align: left;">协调事项</th>
+                <th style="width: 10%;text-align: left;">项目经理</th>
+                <th style="width: 10%;text-align: left;">主责部门</th>
+                <th style="width: 10%;text-align: left;">项目级别</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>FC240811</td>
+                <td>XXXX发电项目</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>张三</td>
+                <td>XXX项目管理部</td>
+                <td>A</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>FC240811</td>
+                <td>XXXX发电项目</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>张三</td>
+                <td>XXX项目管理部</td>
+                <td>A</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>FC240811</td>
+                <td>XXXX发电项目</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>张三</td>
+                <td>XXX项目管理部</td>
+                <td>A</td>
+            </tr>
+        </table>
+    </div>
+    <div class="elsBottom">
+        <div style="width: 23%;">
+            <div class="bgTitle">项目里程碑计划</div>
+            <div id="bottomPie1" style="width:100%;height: 26vh;"></div>
+        </div>
+        <div style="width: 23%;">
+            <div class="bgTitle">质量监督检查</div>
+            <div id="bottomPie2" style="width:100%;height: 26vh;"></div>
+        </div>
+        <div style="width: 23%;">
+            <div class="bgTitle">项目安全检查</div>
+            <div id="bottomPie3" style="width:100%;height: 26vh;"></div>
+        </div>
+        <div style="width: 23%;">
+            <div class="bgTitle">安全监督检查</div>
+            <div id="bottomPie4" style="width:100%;height: 26vh;"></div>
+        </div>
+    </div>
+</body>
+<script src="./js/jquery-3.3.1.min.js"></script>
+<script src="./js/ehcarts.js"></script>
+<script src="./map/china.json"></script>
+<script>
+    function funTimeDate() {
+        var myDate = new Date();
+        var wk = myDate.getDay();
+        var yy = String(myDate.getFullYear());
+        var mm = myDate.getMonth() + 1;
+        var dd = String(myDate.getDate() < 10 ? '0' + myDate.getDate() : myDate.getDate());
+        var hou = String(myDate.getHours() < 10 ? '0' + myDate.getHours() : myDate.getHours());
+        var min = String(myDate.getMinutes() < 10 ? '0' + myDate.getMinutes() : myDate.getMinutes());
+        var sec = String(myDate.getSeconds() < 10 ? '0' + myDate.getSeconds() : myDate.getSeconds());
+        var weeks = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+        var week = weeks[wk];
+        var nowYear = yy + '-' + mm + '-' + dd;
+        var nowTime = hou + ':' + min + ':' + sec;
+        $('#year').html(nowYear);
+        $('#time').html(nowTime);
+    };
+    setInterval(() => {
+        funTimeDate()
+    }, 1000);
+    echarts.registerMap('china', china, {});
+    function funMap(id, title) {
+        var echart = echarts.init(document.getElementById(id));
+        var option = {
+            title: {
+                text: '',
+                left: 'center',
+            },
+            tooltip: {
+                alwaysShowContent: false,
+                enterable: true,
+                formatter: function (params) {
+                    return `项目名称：${params.data.name ? params.data.name : ''}</br>建设规模：${params.data.buildScale ? params.data.buildScale : ''
+                        }</br>计划开工日期：${params.data.planStartDate ? params.data.planStartDate.slice(0, -8) : ''
+                        }</br>计划完工日期：${params.data.planEndDate ? params.data.planEndDate.slice(0, -8) : ''
+                        }</br>项目概算（万元）：${params.data.amount ? params.data.amount : ''
+                        }</br>已发生额（万元）：${params.data.happenedAmount ? params.data.happenedAmount : ''
+                        }</br>预计总投资（万元）${params.data.totalAmount ? params.data.totalAmount : ''
+                        }</br>项目状态：${params.data.status == '1'
+                            ? "<div style='display:inline-block;width:10px;height:10px;background:#00EB4C;border-radius:15px'></div>"
+                            : "<div style='display:inline-block;width:10px;height:10px;background:#FF0000;border-radius:15px'></div>"
+                        }`;
+                },
+            },
+            geo: {
+                map: 'china', //引入地图数据
+                roam: true, //缩放和平移
+                zoom: 1.2, //视角缩放比例
+                label: {
+                    normal: {
+                        show: false,
+                        fontSize: '10',
+                        color: '#fff',
+                    },
+                },
+                itemStyle: {
+                    normal: {
+                        borderColor: '#01fdff',
+                        areaColor: '#0d378e', //区域颜色
+                        color: '#00BCFF',
+                        // shadowColor: "#0c57f8",
+                        // shadowOffsetX: 4,
+                        // shadowOffsetY: 4,
+                    },
+                    emphasis: {
+                        //高亮的显示设置
+                        areaColor: 'skyblue', //鼠标选择区域颜色
+                        shadowOffsetX: 0,
+                        shadowOffsetY: 0,
+                        shadowBlur: 20,
+                        borderWidth: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)',
+                    },
+                },
+            },
+
+            series: [
+                {
+                    type: 'effectScatter',
+                    coordinateSystem: 'geo',
+                    showAllSymbol: true,
+                    symbolSize: 18,
+                    symbol: function (_params, res) {
+                        return `image://./img/${res.data.type}.png`;
+                    },
+                    data: [
+                        {
+                            value: [118.80242, 32.06226],
+                            name: "南京测试数据",
+                            type: 'red'
+                        },
+                        {
+                            value: [114.70192, 34.25535],
+                            name: "阿斯顿撒",
+                            type: "green"
+                        },
+                        {
+                            value: [108.95472, 34.56268],
+                            name: "自行车自行车",
+                            type: 'blue'
+                        },
+                    ],
+                },
+            ],
+        };
+        echart.setOption(option);
+        window.addEventListener('resize', function () {
+            echart.resize();
+        });
+    }
+    funMap('chinaMap', '')
+
+    function funPie1() {
+        var data = [{ value: 6, name: '进度正常' }, { value: 2, name: '进度延迟' },]
+        var echart = echarts.init(document.getElementById('pie1'));
+        var option = {
+            tooltip: {
+                trigger: 'item'
+            },
+            legend: {
+                top: 'center',
+                right: '10%',
+                orient: 'vertical',
+                itemHeight: 12,
+                itemWidth: 12,
+                borderRadius: 15,
+                textStyle: {
+                    color: "#fff",
+                },
+                formatter: function (name) {
+                    var text = ''
+                    if (name == '进度正常') {
+                        text += `${name}${data[0].value}个`
+                    } else {
+                        text += `${name}${data[1].value}个`
+                    }
+                    return `${text}`;
+                },
+            },
+            series: [
+                {
+                    name: '项目里程碑计划',
+                    type: 'pie',
+                    center: ['30%', '50%'],
+                    radius: ['50%', '70%'],
+                    avoidLabelOverlap: false,
+                    label: {
+                        show: false,
+                        position: 'center'
+                    },
+                    emphasis: {
+                        label: {
+                            show: true,
+                            fontSize: 12,
+                            fontWeight: 'bold',
+                            color: '#fff',
+                            formatter: '{b}\n\n{c}'
+                        },
+                    },
+                    labelLine: {
+                        show: false
+                    },
+                    color: ['rgba(0, 252, 217, 1)', 'rgba(253, 58, 0, 1)'],
+                    data: data
+                }
+            ]
+        };
+        echart.setOption(option);
+        window.addEventListener('resize', function () {
+            echart.resize();
+        });
+    }
+    funPie1();
+
+    function funLine1() {
+        var category = [{
+            name: "待建项目",
+            value: 2500
+        },
+        {
+            name: "在建项目",
+            value: 8000
+        },
+        {
+            name: "移交项目 ",
+            value: 3000
+        },
+        {
+            name: "结算项目",
+            value: 3000
+        }]; // 类别
+        var total = 10000; // 数据总数
+        var datas = [];
+        category.forEach(value => {
+            datas.push(value.value);
+        });
+        var echart = echarts.init(document.getElementById('line1'));
+        var option = {
+            xAxis: {
+                max: total,
+                splitLine: {
+                    show: false
+                },
+                axisLine: {
+                    show: false
+                },
+                axisLabel: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                },
+            },
+            grid: {
+                left: 80,
+                top: 20, // 设置条形图的边距
+                right: 40,
+                bottom: 20
+            },
+            yAxis: [{
+                type: "category",
+                inverse: false,
+                data: category,
+                axisLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLabel: {
+                    show: false
+                },
+            }],
+            series: [{
+                // 内
+                type: "bar",
+                barWidth: 12,
+                legendHoverLink: false,
+                silent: true,
+                label: {
+                    normal: {
+                        show: true,
+                        position: "left",
+                        formatter: "{b}",
+                        textStyle: {
+                            color: "#fff",
+                            fontSize: 12,
+                        },
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        barBorderWidth: 1, // 边框宽度
+                        barBorderRadius: 10, //圆角半径
+                        color: function (params) {
+                            var colorList = ['#34FFCC', '#0096F3', '#D0A00C', '#EB3600'];
+                            return colorList[params.dataIndex]
+                        },
+                    }
+                },
+                data: category,
+                z: 0,
+                animationEasing: "elasticOut"
+            },
+            {
+                // 外边框
+                type: "pictorialBar",
+                symbol: "rect",
+                symbolBoundingData: total,
+                itemStyle: {
+                    normal: {
+                        color: "none"
+                    }
+                },
+                label: {
+                    normal: {
+                        position: 'right',
+                        distance: 10, // 向右偏移位置
+                        show: true,
+                        textStyle: {
+                            color: "#fff",
+                            fontSize: 12,
+                        },
+                    },
+                },
+                data: datas,
+            },
+            {
+                name: "外框",
+                type: "bar",
+                barGap: "-120%", // 设置外框粗细
+                data: [total, total, total, total, total, total, total, total, total, total, total, total, total, total, total, total, total, total, total, total],
+                barWidth: 17,
+                itemStyle: {
+                    normal: {
+                        color: "transparent", // 填充色
+                        borderColor: "#34FFCC", // 边框色
+                        borderWidth: 1, // 边框宽度
+                        borderRadius: 10, //圆角半径
+                        label: {
+                            // 标签显示位置
+                            show: false,
+                            position: "top" // insideTop 或者横向的 insideLeft
+                        }
+                    },
+                },
+                z: 1
+            }
+            ]
+        };
+        echart.setOption(option);
+        window.addEventListener('resize', function () {
+            echart.resize();
+        });
+    }
+    funLine1();
+
+    function funLine2() {
+        var echart = echarts.init(document.getElementById('line2'));
+        var option = {
+            title: {
+                text: '单位：万元',
+                top: 0,
+                right: 0,
+                textStyle: {
+                    fontWeight: 'normal',
+                    fontSize: 12,
+                    color: '#fff'
+                }
+            },
+            xAxis: {
+                type: 'category',
+                axisTick: { show: false },
+                axisLine: {
+                    lineStyle: {
+                        color: '#fff'
+                    },
+                },
+                data: ['EPC合同额', '控制概算', '累计收费']
+            },
+            yAxis: {
+                type: 'value',
+                axisLabel: {
+                    textStyle: {
+                        color: "#fff",
+                    },
+                },
+                splitLine: {
+                    lineStyle: {
+                        color: 'rgba(255, 255, 255, 0.15)'
+                    },
+                }
+            },
+            grid: {
+                left: 55,
+                right: 0,
+                top: 25,
+                bottom: 25,
+            },
+            series: [
+                {
+                    data: [10000, 2500, 5500,],
+                    type: 'bar',
+                    barWidth: 17,
+                    itemStyle: {
+                        normal: {
+                            barBorderWidth: 1, // 边框宽度
+                            barBorderRadius: 10, //圆角半径
+                            color: function (params) {
+                                var colorList = ['#FCCA06', '#89D470', '#248EF7'];
+                                return colorList[params.dataIndex]
+                            },
+                        }
+                    },
+                },
+            ]
+        };
+        echart.setOption(option);
+        window.addEventListener('resize', function () {
+            echart.resize();
+        });
+    }
+    funLine2();
+
+    function funBottomPie(id) {
+        var echart = echarts.init(document.getElementById(id));
+        var option = {
+            tooltip: {
+                trigger: 'item'
+            },
+            legend: {
+                top: 'center',
+                right: '0%',
+                orient: 'vertical',
+                itemHeight: 12,
+                itemWidth: 12,
+                borderRadius: 15,
+                textStyle: {
+                    color: "#fff",
+                },
+                formatter: function (name) {
+                    return `自定义${name}`;
+                }
+            },
+            series: [
+                {
+                    name: '项目里程碑计划',
+                    type: 'pie',
+                    center: ['30%', '50%'],
+                    radius: ['50%', '70%'],
+                    avoidLabelOverlap: false,
+                    label: {
+                        show: false,
+                        position: 'center'
+                    },
+                    emphasis: {
+                        label: {
+                            show: true,
+                            fontSize: 12,
+                            fontWeight: 'bold',
+                            color: '#fff',
+                            formatter: '{b}\n\n{c}',
+                        }
+                    },
+                    labelLine: {
+                        show: false
+                    },
+                    color: ['rgba(255, 139, 0, 1)', 'rgba(0, 139, 255, 1)'],
+                    data: [
+                        { value: 1048, name: '整改项' },
+                        { value: 735, name: '整改关闭' },
+                    ]
+                }
+            ]
+        };
+        echart.setOption(option);
+        window.addEventListener('resize', function () {
+            echart.resize();
+        });
+    }
+    funBottomPie('bottomPie1');
+    funBottomPie('bottomPie2');
+    funBottomPie('bottomPie3');
+    funBottomPie('bottomPie4');
+</script>
+
+</html>
